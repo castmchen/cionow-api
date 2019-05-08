@@ -10,7 +10,6 @@
 # dependencies
 /node_modules
 /dist
-/bin
 /.tscache
 
 # profiling files
