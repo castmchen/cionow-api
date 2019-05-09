@@ -2,10 +2,10 @@ import { Schema, Document } from 'mongoose';
 import { baseModel } from './baseModel';
 
 export enum positionEnum {
-  MD = 0,
-  OPSLEAD = 1,
-  MANAGER = 2,
-  PORFOLIO = 4
+  PORFOLIO = 0,
+  MD = 1,
+  OPSLEAD = 2,
+  MANAGER = 4 
 }
 
 export interface positionImp extends Document {

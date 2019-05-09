@@ -15,7 +15,7 @@ export class chartRouter {
       async (req: Request, res: Response, next: NextFunction) => {
         if (req.body && typeof req.body === 'object') {
           positionCollection
-            .findOne({ eid: req.body.MD })
+            .findOne({ eid: req.body.PORFOLIO })
             .then(currentPosition => {
               if (currentPosition) {
                 if (
@@ -23,125 +23,125 @@ export class chartRouter {
                   currentPosition.lowerPositions &&
                   currentPosition.lowerPositions.length > 0
                 ) {
-                  const currentOpslead = currentPosition.lowerPositions.find(
-                    _ => _.eid === req.body.OpsLead
+                  const currentMD = currentPosition.lowerPositions.find(
+                    _ => _.eid === req.body.MD
                   );
-                  if (currentOpslead) {
+                  if (currentMD) {
                     if (
-                      typeof currentOpslead.lowerPositions !== 'undefined' &&
-                      currentOpslead.lowerPositions &&
-                      currentOpslead.lowerPositions.length > 0
+                      typeof currentMD.lowerPositions !== 'undefined' &&
+                      currentMD.lowerPositions &&
+                      currentMD.lowerPositions.length > 0
                     ) {
-                      const currentManager = currentOpslead.lowerPositions.find(
-                        _ => _.eid == req.body.Manager
+                      const currentOpslead = currentMD.lowerPositions.find(
+                        _ => _.eid == req.body.Opslead
                       );
-                      if (currentManager) {
+                      if (currentOpslead) {
                         if (
-                          typeof currentManager.lowerPositions !==
+                          typeof currentOpslead.lowerPositions !==
                             'undefined' &&
-                          currentManager.lowerPositions &&
-                          currentManager.lowerPositions.length > 0
+                          currentOpslead.lowerPositions &&
+                          currentOpslead.lowerPositions.length > 0
                         ) {
-                          const currentPorfolio = currentManager.lowerPositions.find(
-                            _ => _.eid == req.body.Porfolio
+                          const currentManager = currentOpslead.lowerPositions.find(
+                            _ => _.eid == req.body.Manager
                           );
-                          if (!currentPorfolio) {
+                          if (!currentManager) {
                             const position4 = {
-                              level: positionEnum.PORFOLIO,
-                              eid: req.body.Porfolio
+                              level: positionEnum.MANAGER,
+                              eid: req.body.Manager
                             };
-                            currentManager.lowerPositions.push(
+                            currentOpslead.lowerPositions.push(
                               position4 as any
                             );
                           }
                         } else {
                           const position4 = {
-                            level: positionEnum.PORFOLIO,
-                            eid: req.body.Porfolio
+                            level: positionEnum.MANAGER,
+                            eid: req.body.Manager
                           };
-                          currentManager.lowerPositions = [position4 as any];
+                          currentOpslead.lowerPositions = [position4 as any];
                         }
                       } else {
                         const position4 = {
-                          level: positionEnum.PORFOLIO,
-                          eid: req.body.Porfolio
+                          level: positionEnum.MANAGER,
+                          eid: req.body.Manager
                         };
                         const position3 = {
-                          level: positionEnum.MANAGER,
-                          eid: req.body.Manager,
+                          level: positionEnum.OPSLEAD,
+                          eid: req.body.Opslead,
                           lowerPositions: [position4]
                         };
-                        currentOpslead.lowerPositions.push(position3 as any);
+                        currentMD.lowerPositions.push(position3 as any);
                       }
                     } else {
                       const position4 = {
-                        level: positionEnum.PORFOLIO,
-                        eid: req.body.Porfolio
+                        level: positionEnum.MANAGER,
+                        eid: req.body.Manager
                       };
                       const position3 = {
-                        level: positionEnum.MANAGER,
-                        eid: req.body.Manager,
+                        level: positionEnum.OPSLEAD,
+                        eid: req.body.Opslead,
                         lowerPositions: [position4]
                       };
-                      currentOpslead.lowerPositions = [position3 as any];
+                      currentMD.lowerPositions = [position3 as any];
                     }
                   } else {
                     const position4 = {
-                      level: positionEnum.PORFOLIO,
-                      eid: req.body.Porfolio
+                      level: positionEnum.MANAGER,
+                      eid: req.body.Manager
                     };
                     const position3 = {
-                      level: positionEnum.MANAGER,
-                      eid: req.body.Manager,
+                      level: positionEnum.OPSLEAD,
+                      eid: req.body.Opslead,
                       lowerPositions: [position4]
                     };
                     const position2 = {
-                      level: positionEnum.OPSLEAD,
-                      eid: req.body.OpsLead,
+                      level: positionEnum.MD,
+                      eid: req.body.MD,
                       lowerPositions: [position3]
                     };
                     currentPosition.lowerPositions.push(position2 as any);
                   }
                 } else {
                   const position4 = {
-                    level: positionEnum.PORFOLIO,
-                    eid: req.body.Porfolio
+                    level: positionEnum.MANAGER,
+                    eid: req.body.Manager
                   };
                   const position3 = {
-                    level: positionEnum.MANAGER,
-                    eid: req.body.Manager,
+                    level: positionEnum.OPSLEAD,
+                    eid: req.body.Opslead,
                     lowerPositions: [position4]
                   };
                   const position2 = {
-                    level: positionEnum.OPSLEAD,
-                    eid: req.body.OpsLead,
+                    level: positionEnum.MD,
+                    eid: req.body.MD,
                     lowerPositions: [position3]
                   };
                   currentPosition.lowerPositions = [position2 as any];
                 }
 
                 positionCollection.update(
-                  { eid: req.body.MD },
+                  { eid: req.body.PORFOLIO },
                   currentPosition
                 );
-              } else {
+              } else {               
                 const position4 = {
-                  level: positionEnum.PORFOLIO,
-                  eid: req.body.Porfolio
+                  level: positionEnum.MANAGER,
+                  eid: req.body.Manager
                 };
                 const position3 = {
-                  level: positionEnum.MANAGER,
-                  eid: req.body.Manager,
+                  level: positionEnum.OPSLEAD,
+                  eid: req.body.OpsLead,
                   lowerPositions: [position4]
                 };
                 const position2 = {
-                  level: positionEnum.OPSLEAD,
-                  eid: req.body.OpsLead,
+                  level: positionEnum.MD,
+                  eid: req.body.MD,
                   lowerPositions: [position3]
                 };
                 const position1 = {
-                  level: positionEnum.MD,
-                  eid: req.body.MD,
+                  level: positionEnum.PORFOLIO,
+                  eid: req.body.Porfolio,
                   lowerPositions: [position2]
                 };
                 positionCollection.addOne(position1);
@@ -150,10 +150,10 @@ export class chartRouter {
 
           await chartCollection
             .addOne({
+              portfolioEid: req.body.Porfolio,
               mdEid: req.body.MD,
               leaderEid: req.body.OpsLead,
-              managerEid: req.body.Manager,
-              portfolioEid: req.body.Porfolio,
+              managerEid: req.body.Manager,              
               agentName: req.body.AppName,
               clientName: req.body.ToolName,
               hours: req.body.HoursSaved,
@@ -180,10 +180,10 @@ export class chartRouter {
           const chartArray: any[] = [];
           req.body.forEach(_ => {
             chartArray.push({
+              portfolioEid: _.Porfolio,
               mdEid: _.MD,
               leaderEid: _.OpsLead,
-              managerEid: _.Manager,
-              portfolioEid: _.Porfolio,
+              managerEid: _.Manager,             
               agentName: _.AppName,
               clientName: _.ToolName,
               hours: _.HoursSaved,
