@@ -40,7 +40,7 @@ export class rootRouter {
       '/getDefaultLevel',
       async (req: Request, res: Response, next: NextFunction) => {
         await positionCollection
-          .findMany({ level: positionEnum.MD })
+          .findMany({ level: positionEnum.PORFOLIO })
           .then(result => {
             res.send(result);
           });
