@@ -15,7 +15,7 @@ export class chartRouter {
       async (req: Request, res: Response, next: NextFunction) => {
         if (req.body && typeof req.body === 'object') {
           positionCollection
-            .findOne({ eid: req.body.PORFOLIO })
+            .findOne({ eid: req.body.Porfolio })
             .then(currentPosition => {
               if (currentPosition) {
                 if (
@@ -33,7 +33,7 @@ export class chartRouter {
                       currentMD.lowerPositions.length > 0
                     ) {
                       const currentOpslead = currentMD.lowerPositions.find(
-                        _ => _.eid == req.body.Opslead
+                        _ => _.eid == req.body.OpsLead
                       );
                       if (currentOpslead) {
                         if (
@@ -68,7 +68,7 @@ export class chartRouter {
                         };
                         const position3 = {
                           level: positionEnum.OPSLEAD,
-                          eid: req.body.Opslead,
+                          eid: req.body.OpsLead,
                           lowerPositions: [position4]
                         };
                         currentMD.lowerPositions.push(position3 as any);
@@ -80,7 +80,7 @@ export class chartRouter {
                       };
                       const position3 = {
                         level: positionEnum.OPSLEAD,
-                        eid: req.body.Opslead,
+                        eid: req.body.OpsLead,
                         lowerPositions: [position4]
                       };
                       currentMD.lowerPositions = [position3 as any];
@@ -92,7 +92,7 @@ export class chartRouter {
                     };
                     const position3 = {
                       level: positionEnum.OPSLEAD,
-                      eid: req.body.Opslead,
+                      eid: req.body.OpsLead,
                       lowerPositions: [position4]
                     };
                     const position2 = {
@@ -109,7 +109,7 @@ export class chartRouter {
                   };
                   const position3 = {
                     level: positionEnum.OPSLEAD,
-                    eid: req.body.Opslead,
+                    eid: req.body.OpsLead,
                     lowerPositions: [position4]
                   };
                   const position2 = {
@@ -121,7 +121,7 @@ export class chartRouter {
                 }
 
                 positionCollection.update(
-                  { eid: req.body.PORFOLIO },
+                  { eid: req.body.Porfolio },
                   currentPosition
                 );
               } else {               
