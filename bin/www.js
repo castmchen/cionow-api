@@ -5,11 +5,10 @@
 const root = require( "../dist/server.js" )
 const http = require( "http" )
 const webSocket = require( "ws" )
-const httpPort = normalizePort( process.env.Port || 8081 )
+const httpPort = normalizePort( process.env.Port || 80 )
 const app = root.server.bootstrap( ).app
 const httpServer = http.createServer( app )
 httpServer.on( "error", onError )
-httpServer.on( "listening", onListening )
 const wss = new webSocket.Server( { noServer: true } )
 const { socketService } = require( '../dist/services/socketService' )
 wss.on( "connection", ( ws ) => {
@@ -24,7 +23,7 @@ httpServer.on( 'upgrade', ( request, socket, head ) => {
         socket.destroy( )
     }
 } )
-httpServer.listen( httpPort )
+httpServer.listen( httpPort, onListening )
 
 
 function normalizePort( val ) {
