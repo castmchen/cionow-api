@@ -5,7 +5,6 @@
 const root = require( "../dist/server.js" )
 const http = require( "http" )
 const webSocket = require( "ws" )
-const httpPort = normalizePort( process.env.Port || 1337 )
 const app = root.server.bootstrap( ).app
 const httpServer = http.createServer( app )
 httpServer.on( "error", onError )
@@ -23,6 +22,8 @@ httpServer.on( 'upgrade', ( request, socket, head ) => {
         socket.destroy( )
     }
 } )
+
+const httpPort = normalizePort( process.env.Port || 1337 )
 httpServer.listen( httpPort, onListening )
 
 
@@ -61,15 +62,16 @@ function onError( error ) {
 }
 
 function onListening( ) {
-    let activeAddress = ''
-    let activePort = ''
-    const activeHttpInfo = httpServer.address()
-    if(typeof activeHttpInfo === 'string') {
-        activeAddress = activeHttpInfo
-        activePort = httpPort;
-    } else {
-        activeAddress = activeHttpInfo.family + '-' + activeHttpInfo.address;
-        activePort = activeHttpInfo.port;
-    }
-    console.log( `server has started successfully and listened on => ${activeAddress}, port => ${activePort}` )
+    // let activeAddress = ''
+    // let activePort = ''
+    // const activeHttpInfo = httpServer.address()
+    // if(typeof activeHttpInfo === 'string') {
+    //     activeAddress = activeHttpInfo
+    //     activePort = httpPort;
+    // } else {
+    //     activeAddress = activeHttpInfo.family + '-' + activeHttpInfo.address;
+    //     activePort = activeHttpInfo.port;
+    // }
+    // console.log( `server has started successfully and listened on => ${activeAddress}, port => ${activePort}` )
+    console.log("Server running at http://localhost:%d", httpPort);
 }
