@@ -1,9 +1,14 @@
 {
+    "engines": {
+        "node": "10.14.1"
+    },
     "name": "cionowapi",
     "version": "1.0.0",
     "description": "cionowapi 2019.4.22",
     "main": "index.js",
     "scripts": {
+        "start": "node ./bin/www.js",
+        "build": "grunt",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "Dennis(qiang.c.chen@accenture.com)",
