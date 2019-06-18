@@ -32,12 +32,12 @@ export class server {
     mongoose.set('debug', true);
     console.log('-------- init mongo setting --------');
     mongoose.connect(
-      cont.mongo_local.uri + cont.mongo_local.extra,
+      cont.mongo.uri + cont.mongo.extra,
       {
-        // auth: {
-        //   user: cont.mongo_local.user,
-        //   paswwrod: cont.mongo_local.password
-        // },
+        auth: {
+          user: cont.mongo_local.user,
+          password: cont.mongo_local.password
+        },
         connectTimeoutMS: 180000,
         useNewUrlParser: true,
         useCreateIndex: true
