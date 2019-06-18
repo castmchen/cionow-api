@@ -247,7 +247,7 @@ export class chartRouter {
             const queryObj = {
               eventTime: {
                 $lt: new Date().getTime(),
-                $gt: new Date().getTime() - 1000 * 60 * 60
+                $gt: new Date().getTime() - 1000 * 60 * 60 * 24
               }
             };
             await chartCollection.findMany(queryObj).then(result => {

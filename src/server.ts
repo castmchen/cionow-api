@@ -29,14 +29,14 @@ export class server {
 
   private initMongo() {
     mongoose.Promise = global.Promise;
-    mongoose.set('debug', true);
+    mongoose.set('debug', false);
     console.log('-------- init mongo setting --------');
     mongoose.connect(
       cont.mongo.uri + cont.mongo.extra,
       {
         auth: {
-          user: cont.mongo_local.user,
-          password: cont.mongo_local.password
+          user: cont.mongo.user,
+          password: cont.mongo.password
         },
         connectTimeoutMS: 180000,
         useNewUrlParser: true,
