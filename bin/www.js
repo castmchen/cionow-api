@@ -64,12 +64,13 @@ function onError( error ) {
 function onListening( ) {
     const activeAddress = ''
     const activePort = ''
-    if(typeof address === 'string'){
-        activeAddress = httpServer.address()
+    const activeHttpInfo = httpServer.address()
+    if(typeof activeHttpInfo === 'string') {
+        activeAddress = activeHttpInfo
         activePort = httpPort;
-    }else{
-        activeAddress = httpServer.address().family + '-' + httpServer.address().address;
-        activePort = httpServer.address().port;
+    } else {
+        activeAddress = activeHttpInfo.family + '-' + activeHttpInfo.address;
+        activePort = activeHttpInfo.port;
     }
     console.log( `server has started successfully and listened on => ${activeAddress}, port => ${activePort}` )
 }
