@@ -5,7 +5,7 @@
 const root = require( "../dist/server.js" )
 const http = require( "http" )
 const webSocket = require( "ws" )
-const httpPort = normalizePort( process.env.Port || 8080 )
+const httpPort = normalizePort( process.env.Port || 1337 )
 const app = root.server.bootstrap( ).app
 const httpServer = http.createServer( app )
 httpServer.on( "error", onError )
@@ -62,6 +62,14 @@ function onError( error ) {
 }
 
 function onListening( ) {
-    const address = httpServer.address( )
-    console.log( `server has started successfully and listened on => ${address.address}, port => ${httpPort}` )
+    const activeAddress = ''
+    const activePort = ''
+    if(typeof address === 'string'){
+        activeAddress = httpServer.address()
+        activePort = httpPort;
+    }else{
+        activeAddress = httpServer.address().family + '-' + httpServer.address().address;
+        activePort = httpServer.address().port;
+    }
+    console.log( `server has started successfully and listened on => ${activeAddress}, port => ${activePort}` )
 }
