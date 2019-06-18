@@ -5,7 +5,7 @@
 const root = require( "../dist/server.js" )
 const http = require( "http" )
 const webSocket = require( "ws" )
-const httpPort = normalizePort( process.env.Port || 80 )
+const httpPort = normalizePort( process.env.Port || 1337 )
 const app = root.server.bootstrap( ).app
 const httpServer = http.createServer( app )
 httpServer.on( "error", onError )
