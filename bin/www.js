@@ -23,23 +23,9 @@ httpServer.on( 'upgrade', ( request, socket, head ) => {
     }
 } )
 
-const httpPort = normalizePort( process.env.Port || 1337 )
-httpServer.listen( httpPort, onListening )
-
-
-function normalizePort( val ) {
-    const port = parseInt( val, 10 )
-
-    if ( isNaN( port ) ) {
-        return val
-    }
-
-    if ( port >= 0 ) {
-        return port
-    }
-
-    return false
-}
+const port = process.env.PORT || 1337
+httpServer.listen( port )
+console.log("Server running at http://localhost:%d", port)
 
 function onError( error ) {
     if ( error.syscall !== "listen" ) {
@@ -59,19 +45,4 @@ function onError( error ) {
         default:
             throw error
     }
-}
-
-function onListening( ) {
-    // let activeAddress = ''
-    // let activePort = ''
-    // const activeHttpInfo = httpServer.address()
-    // if(typeof activeHttpInfo === 'string') {
-    //     activeAddress = activeHttpInfo
-    //     activePort = httpPort;
-    // } else {
-    //     activeAddress = activeHttpInfo.family + '-' + activeHttpInfo.address;
-    //     activePort = activeHttpInfo.port;
-    // }
-    // console.log( `server has started successfully and listened on => ${activeAddress}, port => ${activePort}` )
-    console.log("Server running at http://localhost:%d", httpPort);
 }
