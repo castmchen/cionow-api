@@ -6,6 +6,7 @@ export class rootRouter {
 
   public static create(router: Router) {
     router.get('/test', (req: Request, res: Response, next: NextFunction) => {
+      res.writeHead(200, {"Content-Type": "text/plain"});
       res.send('success');
     });
 
