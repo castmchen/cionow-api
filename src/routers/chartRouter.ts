@@ -242,7 +242,7 @@ export class chartRouter {
     router.post(
       '/filterbypositionandperiod',
       async (req: Request, res: Response, next: NextFunction) => {
-        const bodyInfo = JSON.parse(req.body);
+        const bodyInfo = req.body;
           if (typeof bodyInfo.periodEnd === 'undefined') {
             const queryObj = {
               eventTime: {
