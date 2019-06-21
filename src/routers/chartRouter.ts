@@ -242,8 +242,8 @@ export class chartRouter {
     router.post(
       '/filterbypositionandperiod',
       async (req: Request, res: Response, next: NextFunction) => {
-        if (req.body && typeof req.body === 'object') {
-          if (typeof req.body.periodEnd === 'undefined') {
+        const bodyInfo = JSON.parse(req.body);
+          if (typeof bodyInfo.periodEnd === 'undefined') {
             const queryObj = {
               eventTime: {
                 $lt: new Date().getTime(),
@@ -254,8 +254,9 @@ export class chartRouter {
               res.send(result);
             });
           } else {
+            console.log(`Start to filter data ${bodyInfo}`);
             await chartCollection
-              .findByPositionAndPeriod(req.body)
+              .findByPositionAndPeriod(bodyInfo)
               .then(result => {
                 res.send(result);
               })
@@ -267,7 +268,6 @@ export class chartRouter {
               });
           }
         }
-      }
     );
   }
 }

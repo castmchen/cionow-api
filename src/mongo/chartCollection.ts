@@ -53,6 +53,7 @@ class chartModel extends baseModel<chartImp> {
     const queryInfo: any = {};
     const keys = Object.keys(bodyInfo);
     keys.forEach(p => {
+      console.log(`key is ${p}, value is ${bodyInfo[p]}`);
       if(Object.is(p, 'periodStart')){
         queryStart = bodyInfo[p]
       }else if(Object.is(p, 'periodEnd')){
@@ -61,7 +62,7 @@ class chartModel extends baseModel<chartImp> {
         Object.assign(queryInfo, {p: bodyInfo[p]})
       }
     })
-
+    console.log(`Query string have been built successfully, ${queryInfo}`);
     return this._model
       .find(queryInfo)
       .$where(`${queryStart} < this.eventTime && this.eventTime < ${queryEnd}`)
