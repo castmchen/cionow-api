@@ -48,24 +48,24 @@ class chartModel extends baseModel<chartImp> {
   }
 
   findByPositionAndPeriod(bodyInfo): Promise<chartImp[]> {
-    let queryStart: number = 0;
-    let queryEnd: number = 0;
-    const queryInfo: any = {};
+    const queryInfo: any = {eventTime: {
+                $lt: new Date().getTime(),
+                $gt: new Date().getTime() - 1000 * 60 * 60 * 24
+              }};
     const keys = Object.keys(bodyInfo);
     keys.forEach(p => {
       console.log(`key is ${p}, value is ${bodyInfo[p]}`);
       if(Object.is(p, 'periodStart')){
-        queryStart = bodyInfo[p]
+        queryInfo.eventTime.$gt = bodyInfo[p];
       }else if(Object.is(p, 'periodEnd')){
-        queryEnd == bodyInfo[p]
+        queryInfo.eventTime.$lt = bodyInfo[p];
       }else{
-        Object.assign(queryInfo, {p: bodyInfo[p]})
+        queryInfo[p] = bodyInfo[p]
       }
     })
     console.log(`Query string have been built successfully, ${queryInfo}`);
     return this._model
       .find(queryInfo)
-      .$where(`${queryStart} < this.eventTime && this.eventTime < ${queryEnd}`)
       .sort({ eventTime: -1 })
       .exec();
   }
