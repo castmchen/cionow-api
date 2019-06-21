@@ -47,23 +47,20 @@ class chartModel extends baseModel<chartImp> {
       .exec();
   }
 
-  findByPositionAndPeriod(info): Promise<chartImp[]> {
+  findByPositionAndPeriod(bodyInfo): Promise<chartImp[]> {
     let queryStart: number = 0;
     let queryEnd: number = 0;
     const queryInfo: any = {};
-    for (let key in info) {
-      if (key === 'periodStart') {
-        queryStart = info[key];
-        continue;
+    const keys = Object.keys(bodyInfo);
+    keys.forEach(p => {
+      if(Object.is(p, 'periodStart')){
+        queryStart = bodyInfo[p]
+      }else if(Object.is(p, 'periodEnd')){
+        queryEnd == bodyInfo[p]
+      }else{
+        Object.assign(queryInfo, {p: bodyInfo[p]})
       }
-      if (key === 'periodEnd') {
-        queryEnd = info[key];
-        continue;
-      }
-      if (info[key] && key !== 'periodStart' && key !== 'periodEnd') {
-        queryInfo[key] = info[key];
-      }
-    }
+    })
 
     return this._model
       .find(queryInfo)
