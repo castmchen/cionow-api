@@ -2,7 +2,7 @@ import { Schema, Document } from 'mongoose';
 import { baseModel } from './baseModel';
 
 export enum positionEnum {
-  PORFOLIO = 0,
+  PORTFOLIO = 0,
   MD = 1,
   OPSLEAD = 2,
   MANAGER = 4 

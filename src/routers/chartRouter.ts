@@ -15,7 +15,7 @@ export class chartRouter {
       async (req: Request, res: Response, next: NextFunction) => {
         if (req.body && typeof req.body === 'object') {
           positionCollection
-            .findOne({ eid: req.body.Porfolio })
+            .findOne({ eid: req.body.Portfolio })
             .then(currentPosition => {
               if (currentPosition) {
                 if (
@@ -121,7 +121,7 @@ export class chartRouter {
                 }
 
                 positionCollection.update(
-                  { eid: req.body.Porfolio },
+                  { eid: req.body.Portfolio },
                   currentPosition
                 );
               } else {               
@@ -140,8 +140,8 @@ export class chartRouter {
                   lowerPositions: [position3]
                 };
                 const position1 = {
-                  level: positionEnum.PORFOLIO,
-                  eid: req.body.Porfolio,
+                  level: positionEnum.PORTFOLIO,
+                  eid: req.body.Portfolio,
                   lowerPositions: [position2]
                 };
                 positionCollection.addOne(position1);
@@ -150,7 +150,7 @@ export class chartRouter {
 
           await chartCollection
             .addOne({
-              portfolioEid: req.body.Porfolio,
+              portfolioEid: req.body.Portfolio,
               mdEid: req.body.MD,
               leaderEid: req.body.OpsLead,
               managerEid: req.body.Manager,              
@@ -180,7 +180,7 @@ export class chartRouter {
           const chartArray: any[] = [];
           req.body.forEach(_ => {
             chartArray.push({
-              portfolioEid: _.Porfolio,
+              portfolioEid: _.Portfolio,
               mdEid: _.MD,
               leaderEid: _.OpsLead,
               managerEid: _.Manager,             
