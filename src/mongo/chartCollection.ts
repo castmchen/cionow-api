@@ -10,6 +10,7 @@ export interface chartImp extends Document {
   clientName: String;
   hours: String;
   eventTime: Number;
+  automationType: String;
 }
 
 const chartSchema = new Schema({
@@ -20,7 +21,8 @@ const chartSchema = new Schema({
   agentName: { type: String, required: false },
   clientName: { type: String, required: false },
   hours: { type: String, required: false },
-  eventTime: { type: Number, required: false }
+  eventTime: { type: Number, required: false },
+  automationType: {type: String, required: true }
 });
 
 chartSchema.on('index', error => {
@@ -54,7 +56,6 @@ class chartModel extends baseModel<chartImp> {
               }};
     const keys = Object.keys(bodyInfo);
     keys.forEach(p => {
-      console.log(`key is ${p}, value is ${bodyInfo[p]}`);
       if(Object.is(p, 'periodStart')){
         queryInfo.eventTime.$gt = bodyInfo[p];
       }else if(Object.is(p, 'periodEnd')){

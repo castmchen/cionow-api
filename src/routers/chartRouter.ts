@@ -157,7 +157,8 @@ export class chartRouter {
               agentName: req.body.AppName,
               clientName: req.body.ToolName,
               hours: req.body.HoursSaved,
-              eventTime: req.body.EventTime
+              eventTime: req.body.EventTime,
+              automationType: req.body.AutomationType ? req.body.AutomationType : ''
             })
             .then(result => {
               eventService.getInstance().triggerSocketAction(result);

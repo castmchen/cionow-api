@@ -22,7 +22,7 @@ const positionSchema = new Schema({
 
 positionSchema.on('index', error => {
   console.error(
-    `An error has been occured while processing position schema information, Details: ${error}`
+    `An error has been occurred while processing position schema information, Details: ${error}`
   );
 });
 

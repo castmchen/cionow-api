@@ -14,7 +14,7 @@ export const socketService = {
       if (data) {
         eventService.getInstance().waitForSocketConnection(ws, () => {
           ws.send(JSON.stringify(data));
-        });
+        }, 0);
       }
     });
   }
