@@ -1,9 +1,9 @@
 export default {
   mongo: {
-    uri: 'mongodb://cionow.documents.azure.com:10255/cionow',
-    user: 'cionow',
+    uri: 'mongodb://cionowdb.documents.azure.com:10255/cionowdb',
+    user: 'cionowdb',
     password:
-      'Yp68jwXeNu7LLo7PCpyonP0G25TTaJaEK9qHX8pavC24k5JYFKp9Jv7VDjGAJoJoJ1kzL1qWb2yhY2B3v6j7fA==',
+      '5zuwsQTD0iE9D46WQkQSpykW2KafeRcgulxiLqNbCERgsxoZNbDDXYB3Xfm7B7jsc8IqvxmA2yghQXiirP5CeA==',
     extra: '?ssl=true&replicaSet=globaldb&sslverifycertificate=false'
   },
   mongo_local: {
